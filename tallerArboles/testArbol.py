@@ -1,5 +1,5 @@
 import arbol as a
-import random
+
 
 def main():
     arbol = a.Tree()
@@ -10,11 +10,26 @@ def main():
     arbol.add(30)
     arbol.add(45)
     arbol.add(53)
-    arbol.add(46)
-        
+    arbol.add(61)
+    
     arbol.print()
-    arbol.isComplete()
-    print(arbol.isComplete())  
+    
+    if arbol.isComplete():
+        print("Is complete")
+    else:
+        print("Is not complete")
+        
+    if arbol.isFull():
+        print("Is full")
+    else:
+        print("Is not full")
+        
+    print("inOrder: ")
+    arbol.inOrder()
+        
+    
+    
+    
 
 if __name__ == '__main__':
     main()

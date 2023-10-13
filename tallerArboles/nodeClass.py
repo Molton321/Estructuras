@@ -1,12 +1,12 @@
 class Node:
     self = 0
 
-    def __init__(self, newData):
+    def __init__(self, newData, height):
         self.self = newData
         self.left = None
         self.right = None
         self.isLeaf = True
-        self.height = 1
+        self.height = height
 
     def getData(self):
         return self.self
@@ -28,10 +28,11 @@ class Node:
         self.right = newRight
         self.isLeaf = False
     
-    def print(self):
+    def printo(self):
         print("[address: " + str(id(self))+" ]")
         print("Data: " + str(self.getData()))
         print("Is leaf: " + str(self.isLeaf))
+        print("Height: " + str(self.height))
         if self.left != None:
             print("-Left self: [address: " + str(id(self.left.getData())) +" ]")
             print("Data: " + str(self.left.getData()))
@@ -43,6 +44,8 @@ class Node:
         else:
             print("-Right self: None")
         print("---------------------------------------------------")
-
-
+        
+    
+    def printData(self):
+        print("Data: " + str(self.getData()))
 
