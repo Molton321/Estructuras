@@ -24,6 +24,7 @@ class Node:
         self.children = []
         self.father = father
         self.leaf = True
+        self.fin = False
         #TODO faktan atributos
 
     """Docstring for Getters y Setters de los atributos del nodo
@@ -60,9 +61,6 @@ class Node:
     Keyword arguments:
         father: Node -- El nodo padre
         node: Node -- El nodo a ser agregado
-    
-    Return:
-        Agrega el nodo a la lista de hijos del nodo padre
     """
 
     def add_Child(self, father: Node, node: Node):
@@ -73,16 +71,36 @@ class Node:
     keyword arguments:
         father: Node -- El nodo padre
         node: Node -- El nodo a ser eliminado
-    
-    Return:
-        Elimina el nodo de la lista de hijos del nodo padre si es que existe
     """
     def remove_Child(self, father: Node, node: Node):
         for node in father.children:
             if node == node:
                 father.children.remove(node)
     
-
+    """Copiar el estado de un nodo
+    Este metodo es para evitar que se modifique el estado del tablero de cualquier
+    nodo al crear una copia profunda eliminando las referencias tanto de la lista 
+    externa como de la lista interna
+    
+    keyword arguments:
+        status: list[list] -- El estado del tablero a ser copiado
+        
+    return:
+        Retorna el estado del tablero copiado sin referencias a la lista original 
+    """
+    
+    def copy_Status(self, status: list = None):
+        if status is None:
+            status = self.status
+        return list(map(lambda x: x.copy(), status)) 
+    # map aplica una funcion(lambda x: x.copy()) a cada elemento de la lista (status)
+    # Lambda es una funcion anonima que recibe un parametro x "(listas internas)" y retorna x.copy() la copia de las listas internas
+    
+    """Convierte el nodo a un diccionario
+    Preferible solo usar con la raiz del arbol
+    Return: 
+        Retorna el nodo en forma de diccionario
+    """
     
     def to_dict(self):
         
@@ -90,7 +108,9 @@ class Node:
             "player": self.player,
             "status": [str(self.status[0]), str(self.status[1]), str(self.status[2])],
             "score": self.score,
-            "children": list(map(lambda child: child.to_dict(), self.children))
+            "children": list(map(lambda child: child.to_dict(), self.children)) 
+            # map aplica una funcion(lambda child: child.to_dict()) a cada elemento de la lista (children)
+            # lambda es una funcion anonima(recursiva) que recibe un parametro child y repite el proceso hasta que no haya mas hijos
         }
         
     
